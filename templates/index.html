@@ -9,24 +9,28 @@
     <title>Masti Time</title>
 </head>
 <body>
-    <div class="text-center my-3" id="action">
-        <div>
-            <input placeholder="Enter your username" id="username"/>
+    <h1 class="text-center">It's Masti Time</h1>
+    <div class="my-4" id="action">
+        <div class="input-wrapper text-center">
+            <input class="text-center" placeholder="Enter your username" id="username"/>
         </div>
         <button class="my-2" id="start">Start</button>
     </div>
-    <div id="main">
-        <h1 class="text-center">It's Masti Time</h1>
-        <div class="video-call my-3">
-            <div class="text-center peer">
-                <p id="other-username">Finding...</p>
-                <video autoPlay id="other-user" src=""></video>
-                <div class="loader" id="other-loader"></div>
+    <div id="main" class="">
+        <div class="video-call">
+            <div class="peer">
+                <p class="text-center" id="other-username">Finding...</p>
+                <div class="frame">
+                    <video autoPlay id="other-user" src=""></video>
+                    <div class="loader" id="other-loader"></div>
+                </div>
             </div>
-            <div class="text-center peer">
-                <p id="self-username">Loading...</p>
-                <video autoPlay id="self-user" src=""></video>
-                <div class="loader" id="self-loader"></div>
+            <div class="peer">
+                <p class="text-center" id="self-username">Loading...</p>
+                <div class="frame">
+                    <video autoPlay id="self-user" src=""></video>
+                    <div class="loader" id="self-loader"></div>
+                </div>
             </div>
         </div>
     </div>

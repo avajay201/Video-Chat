@@ -1,6 +1,9 @@
 function main(selfPeer){
     document.getElementById('main').style.display = 'block';
     document.getElementById('action').style.display = 'none';
+    let h1Height = document.getElementsByTagName("h1")[0].offsetHeight;
+    let mainDiv = document.getElementById("main");
+    mainDiv.style.height = "calc(100vh - " + (h1Height + h1Height + h1Height) + "px)";
     const mapPeers = {};
 
     // using webcam
@@ -44,7 +47,7 @@ function main(selfPeer){
             }
             websocket.onmessage = function (event) {
                 let parsedData = JSON.parse(event.data);
-                console.log('Message recieved -', parsedData);
+                // console.log('Message recieved -', parsedData);
         
                 let peerUser = parsedData['peer'];
                 let action = parsedData['action'];
