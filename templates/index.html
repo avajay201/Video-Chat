@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Masti Time</title>
+</head>
+<body>
+    <div class="text-center my-3" id="action">
+        <div>
+            <input placeholder="Enter your username" id="username"/>
+        </div>
+        <button class="my-2" id="start">Start</button>
+    </div>
+    <div id="main">
+        <h1 class="text-center">It's Masti Time</h1>
+        <div class="video-call my-3">
+            <div class="text-center peer">
+                <p id="other-username">Finding...</p>
+                <video autoPlay id="other-user" src=""></video>
+                <div class="loader" id="other-loader"></div>
+            </div>
+            <div class="text-center peer">
+                <p id="self-username">Loading...</p>
+                <video autoPlay id="self-user" src=""></video>
+                <div class="loader" id="self-loader"></div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+.video-call {
+    display: flex;
+    justify-content: center;
+}
+
+.video-call .peer {
+    position: relative;
+    width: 600px;
+    height: 483px;
+    max-width: 97%;
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+    border: 3px solid greenyellow;
+}
+
+.video-call .peer p {
+    border-bottom: 3px solid lightgray;
+    margin-bottom: 0;
+    font-weight: bold;
+}
+
+.video-call video {
+    height: 450px;
+    width: 600px;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+#main {
+    display: none;
+}
+
+#other-user, #self-user {
+    display: none;
+}
+
+#username {
+    width: 350px;
+    height: 40px;
+}
+
+#start {
+    width: 80px;
+    height: 30px;
+}
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    top: 50%;
+    position: absolute;
+    left: 20%;
+    width: 350px;
+    height: 14px;
+    background: radial-gradient(circle closest-side,#000 92%,#0000) calc(100%/3) 0/calc(100%/4) 100%;
+    animation: l2 0.5s infinite linear;
+  }
+  @keyframes l2 {
+    100% {background-position: 0 0}
+}
+
+@media (max-width: 500px) {
+    .video-call {
+        display: block;
+    }
+
+    .video-call .peer {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        height: 100vh;
+    }
+
+    .video-call video {
+        height: 100vh;
+    }
+
+    .loader {
+        left: 8%;
+    }
+}

@@ -1,0 +1,1 @@
+daphne -e ssl:8000:localhost.key:localhost.crt masti_back.asgi:application
