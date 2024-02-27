@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="register-view">
+    <h1 class="text-center current">Register</h1>
+    <form id="register-form" class="register-form my-3" accept="/register" method="post">
+        {% csrf_token %}
+        <div class="text-center my-3">
+            <input class="mx-3" name="fname" id="fname" placeholder="First Name"/>
+            <input class="mx-3" name="lname" id="lname" placeholder="Last Name"/>
+        </div>
+        <div class="text-center my-3">
+            <input class="mx-3" name="username" id="username" placeholder="Username"/>
+            <select class="mx-3" name="gender" id="gender">
+                <option disabled selected value="">Select gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+                <option value="O">Other</option>
+            </select>
+        </div>
+        <div class="text-center my-3">
+            <input class="mx-3" name="password" id="password" type="password" placeholder="Password"/>
+            <input class="mx-3" name="cpassword" id="cpassword" type="password" placeholder="Confirm Password"
+            />
+        </div>
+        <div class="text-center my-3 dob">
+            <label for="dob"><b>DOB</b></label>
+            <input class="mx-3" name="dob" id="dob" type="date"/>
+        </div>
+        <button class="my-2" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock body %}
+{% block js %}
+let msg = "{{msg}}"
+if (msg){
+    alert(msg);
+}
+{% endblock js %}

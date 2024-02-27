@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block body %}
+<div>
+    <h1 class="text-center current">Login</h1>
+    <form id="login-form" class="my-3 text-center" accept="/login" method="post">
+        {% csrf_token %}
+        <div class="text-center my-3">
+            <input class="mx-3" name="username" id="username" placeholder="Username"/>
+            <input class="mx-3" name="password" type="password" id="password" placeholder="Password"/>
+        </div>
+        <button class="my-2" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock body %}
+{% block js %}
+let msg = "{{msg}}"
+if (msg){
+    alert(msg);
+}
+{% endblock js %}

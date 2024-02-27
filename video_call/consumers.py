@@ -16,6 +16,14 @@ class VideoCallConsumer(AsyncWebsocketConsumer):
         # print('Connected')
 
     async def disconnect(self, close_code):
+        message = {'status': 'disconnect'}
+        await self.channel_layer.group_send(
+            self.room_name,
+            {
+                'type': 'send.sdp',
+                'message': message
+            }
+        )
         await self.channel_layer.group_discard(
             self.room_name,
             self.channel_name
@@ -52,7 +60,7 @@ class VideoCallConsumer(AsyncWebsocketConsumer):
         await self.send(
             text_data=json.dumps(message)
         )
-    
+
     async def member_count(self):
         group_info = self.channel_layer.channels
         members = len(group_info)

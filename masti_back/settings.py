@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     '*'
 ]
 
+AUTH_USER_MODEL = 'video_call.Account'
 
 # Application definition
 
@@ -66,7 +67,7 @@ ROOT_URLCONF = 'masti_back.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,10 +81,10 @@ TEMPLATES = [
 ]
 
 # run on https
-SECURE_SSL_REDIRECT = True
-SECURE_SSL_HOST = 'localhost:8000'
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_SSL_HOST = 'localhost:8000'
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# SESSION_COOKIE_SECURE = True
 
 
 # WSGI_APPLICATION = 'masti_back.wsgi.application'
@@ -143,7 +144,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block body %}
+    <div id="main">
+        <div class="video-call">
+            <div class="peer other-peer">
+                <p class="text-center" id="other-username">Finding...</p>
+                <div class="frame">
+                    <svg xmlns="http://www.w3.org/2000/svg" id="skip" width="50" height="50" fill="currentColor" class="bi bi-skip-forward" viewBox="0 0 16 16">
+                        <path d="M15.5 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V8.752l-6.267 3.636c-.52.302-1.233-.043-1.233-.696v-2.94l-6.267 3.636C.713 12.69 0 12.345 0 11.692V4.308c0-.653.713-.998 1.233-.696L7.5 7.248v-2.94c0-.653.713-.998 1.233-.696L15 7.248V4a.5.5 0 0 1 .5-.5M1 4.633v6.734L6.804 8zm7.5 0v6.734L14.304 8z"/>
+                    </svg>
+                    <video autoPlay id="other-user" src=""></video>
+                    <div class="loader" id="other-loader"></div>
+                </div>
+            </div>
+            <div class="peer">
+                <p class="text-center" id="self-username">Loading...</p>
+                <div class="frame">
+                    <video autoPlay id="self-user" src=""></video>
+                    <div class="loader" id="self-loader"></div>
+                </div>
+            </div>
+            <div id="start-btn">
+                <button id="start">Start</button>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

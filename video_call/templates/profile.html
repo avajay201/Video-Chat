@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load dob %}
+{% block body %}
+<div>
+    <h1 class="text-center current">Profile</h1>
+    <div class="profile-view text-center">
+        <div class="profile-picture">
+            {% if request.user.profile_picture %}
+                <img src="/media/{{request.user.profile_picture}}" />
+            {% else %}
+                {% if request.user.gender == 'O' %}
+                    <img src="{% static 'image/o.jpg' %}" />
+                {% else %}
+                    {% with age=request.user.dob|calculate_age %}
+                        {% if age <= 18 %}
+                            {% if request.user.gender == 'M' %}
+                                <img src="{% static 'image/b1.jpg' %}" />
+                            {% else %}
+                                <img src="{% static 'image/g1.jpg' %}" />
+                            {% endif %}
+                        {% elif age > 18 and age <= 30 %}
+                            {% if request.user.gender == 'M' %}
+                                <img src="{% static 'image/b2.jpg' %}" />
+                            {% else %}
+                                <img src="{% static 'image/g2.jpg' %}" />
+                            {% endif %}
+                        {% elif age > 18 and age > 30 %}
+                            {% if request.user.gender == 'M' %}
+                                <img src="{% static 'image/b3.jpg' %}" />
+                            {% else %}
+                                <img src="{% static 'image/g3.jpg' %}" />
+                            {% endif %}
+                        {% endif %}
+                    {% endwith %}
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="username">{{request.user.username}}</div>
+        <div id="user-details">
+            <div class="user-details my-4">
+                <div>First Name</div>
+                <div>{{request.user.first_name}}</div>
+            </div>
+            <div class="user-details my-4">
+                <div>Last Name</div>
+                <div>{{request.user.last_name}}</div>
+            </div>
+            <div class="user-details my-4">
+                <div>DOB</div>
+                <div>{{request.user.dob|date:'d N Y'}}</div>
+            </div>
+            <div class="user-details my-4">
+                <div>Gender</div>
+                <div>{{request.user.get_gender_display}}</div>
+            </div>
+            <button id="edit-profile">Edit</button>
+        </div>
+        <form id="profile-form" style="display: none;" class="register-form my-3" accept="/profile" method="post">
+            {% csrf_token %}
+            <div class="text-center my-3">
+                <input class="mx-3" name="fname" value="{{request.user.first_name}}" id="fname" placeholder="First Name"/>
+                <input class="mx-3" name="lname" value="{{request.user.last_name}}" id="lname" placeholder="Last Name"/>
+            </div>
+            <div class="text-center my-3">
+                <input class="mx-3" type="date" value="{{request.user.dob|date:'Y-m-d'}}" name="dob" id="dob"/>
+                <select class="mx-3" name="gender" id="gender">
+                    <option {% if request.user.gender == "M" %}selected{% endif %} value="M">Male</option>
+                    <option {% if request.user.gender == "F" %}selected{% endif %} value="F">Female</option>
+                    <option {% if request.user.gender == "O" %}selected{% endif %} value="O">Other</option>
+                </select>
+            </div>
+            <button class="my-2" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock body %}
+{% block js %}
+let msg = "{{msg}}"
+if (msg){
+    alert(msg);
+    window.location.href = '/profile';
+}
+{% endblock js %}

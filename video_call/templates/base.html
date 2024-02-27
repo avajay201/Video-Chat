@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load dob %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>It's Masti Time</title>
+</head>
+<body>
+    <div class="heading">
+        <h1 class="text-center"><a href="/">It's Masti Time</a></h1>
+        <div>
+            {% if request.user.is_authenticated %}
+            <input hidden id="username" value="{{request.user.username}}">
+            {% with age=request.user.dob|calculate_age %}
+                <input hidden id="age" value="{{age}}">
+            {% endwith %}
+            <input hidden id="gender" value="{{request.user.get_gender_display}}">
+            <div class="profile">
+                <div class="mx-5">
+                    <a href="/profile">
+                        {% if request.user.profile_picture %}
+                            <img src="/media/{{request.user.profile_picture}}" />
+                        {% else %}
+                            {% if request.user.gender == 'O' %}
+                                <img src="{% static 'image/o.jpg' %}" />
+                            {% else %}
+                                {% with age=request.user.dob|calculate_age %}
+                                    {% if age <= 18 %}
+                                        {% if request.user.gender == 'M' %}
+                                            <img src="{% static 'image/b1.jpg' %}" />
+                                        {% else %}
+                                            <img src="{% static 'image/g1.jpg' %}" />
+                                        {% endif %}
+                                    {% elif age > 18 and age <= 30 %}
+                                        {% if request.user.gender == 'M' %}
+                                            <img src="{% static 'image/b2.jpg' %}" />
+                                        {% else %}
+                                            <img src="{% static 'image/g2.jpg' %}" />
+                                        {% endif %}
+                                    {% elif age > 18 and age > 30 %}
+                                        {% if request.user.gender == 'M' %}
+                                            <img src="{% static 'image/b3.jpg' %}" />
+                                        {% else %}
+                                            <img src="{% static 'image/g3.jpg' %}" />
+                                        {% endif %}
+                                    {% endif %}
+                                {% endwith %}
+                            {% endif %}
+                        {% endif %}
+                    </a>
+                </div>
+                <a href="/logout">Logout</a>
+            </div>
+            {% else %}
+                <a href="/login">Login</a>
+                <span>|</span>
+                <a href="/register">Register</a>
+            {% endif %}
+        </div>
+    </div>
+    {% block body %}{% endblock body %}
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <script>{% block js %}{% endblock js %}</script>
+</body>
+</html>
