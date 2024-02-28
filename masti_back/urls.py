@@ -21,5 +21,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('video_call.urls'))
+    path('', include('video_call.urls')),
+    path('accounts/', include('allauth.urls')),
+    # path('accounts/', include('allauth.socialaccount.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

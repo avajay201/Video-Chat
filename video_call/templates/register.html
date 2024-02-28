@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 {% block body %}
 <div class="register-view">
     <h1 class="text-center current">Register</h1>
@@ -27,6 +28,13 @@
             <input class="mx-3" name="dob" id="dob" type="date"/>
         </div>
         <button class="my-2" type="submit">Submit</button>
+    </form>
+    <form action="{% provider_login_url 'google' %}" method="GET" class="google-login-form">
+        <button type="submit" class="google-login-button">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo"
+                class="google-logo">
+            <span>Register with Google</span>
+        </button>
     </form>
 </div>
 {% endblock body %}

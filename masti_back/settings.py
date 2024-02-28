@@ -41,10 +41,24 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
     'video_call',
     'corsheaders',
-    'channels'
+    'channels',
 ]
+
+SITE_ID = 3
+
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+    # 'account.authentication.EmailAuthBackend',
+    # 'social_core.backends.GoogleOAuth2',
+]
+
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:5173',
@@ -153,3 +167,22 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# google auth
+# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '720656577488-bvo3hk4vo8o8vha9jf964g1aashi7q91.apps.googleusercontent.com'
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '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'
+# CLIENT_ID = '688044721152-qeeqnd1fhikdntguqe9o3nk9stt0g0q3.apps.googleusercontent.com'
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         'SCOPE': ['profile', 'email'],
+#         'AUTH_PARAMS': {'access_type': 'online'},
+#         'APP': {
+#             'client_id': CLIENT_ID,
+#             'secret': SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET,
+#             # 'key': SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+#         }
+#     }
+# }
+
+LOGIN_REDIRECT_URL = '/'

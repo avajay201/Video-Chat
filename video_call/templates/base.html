@@ -27,7 +27,7 @@
                         {% else %}
                             {% if request.user.gender == 'O' %}
                                 <img src="{% static 'image/o.jpg' %}" />
-                            {% else %}
+                            {% elif request.user.gender %}
                                 {% with age=request.user.dob|calculate_age %}
                                     {% if age <= 18 %}
                                         {% if request.user.gender == 'M' %}

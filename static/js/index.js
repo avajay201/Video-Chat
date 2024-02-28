@@ -1,6 +1,9 @@
 function main(){
     let h1Height = document.getElementsByTagName("h1")[0].offsetHeight;
     let mainDiv = document.getElementById("main");
+    if (!mainDiv){
+        return;
+    }
     mainDiv.style.height = "calc(100vh - " + (h1Height + h1Height + h1Height) + "px)";
     let selfPeer = document.getElementById('username').value;
     let age = document.getElementById('age').value;
@@ -9,7 +12,9 @@ function main(){
         alert('Something went wrong.');
         window.location.href = '/';
     }
-    const mapPeers = {};
+    let mapPeers = {};
+    let connectionInterval;
+    let connectivityInterval;
 
     // using webcam
     let selfStream = new MediaStream();
@@ -38,6 +43,7 @@ function main(){
     // web rtc connection
     let websocket;
     function conectivity(){
+        console.log('connecting...');
         // creating websokcet url
         let host = window.location.host;
         let protocol = window.location.protocol;
@@ -51,6 +57,7 @@ function main(){
                 // console.log('WebSocket connected');
                 sendSignal('new-peer', {});
                 clearInterval(connectionInterval);
+                clearInterval(connectivityInterval);
             }
             websocket.onmessage = function (event) {
                 let parsedData = JSON.parse(event.data);
@@ -59,14 +66,15 @@ function main(){
                     for (let peerUser in mapPeers) {
                         let peer = mapPeers[peerUser][0];
                         peer.close();
-                        delete mapPeers[peerUser];
+                        // delete mapPeers[peerUser];
+                        mapPeers = {};
                     }
                     document.getElementById('skip').style.display = 'none';
                     document.getElementById('other-user').style.display = 'none';
                     document.getElementById('other-loader').style.display = 'block';
                     document.getElementById('other-username').textContent = 'Finding...';
                     websocket.close();
-                    setTimeout(()=>{
+                    connectivityInterval = setInterval(()=>{
                         conectivity();
                     }, 2000);
                     return;
@@ -80,19 +88,24 @@ function main(){
                 if (selfPeer === peerUser){
                     return;
                 }
-                let receiver_channel_name = parsedData['message']['receiver_channel_name'];
-                if (action === 'new-peer'){
-                    createOffer(peerData, receiver_channel_name);
-                }
-                else if (action === 'new-offer'){
-                    let offer = parsedData['message']['sdp'];
-                    createAnswer(offer, peerData, receiver_channel_name);
-                }
-                else if (action === 'new-answer'){
-                    let answer = parsedData['message']['sdp'];
-                    let peer = mapPeers[peerUser][0];
-                    peer.setRemoteDescription(answer);
-                }
+                console.log('mapPeers>>>', Object.keys(mapPeers));
+                let connectedUser = document.getElementById('other-username').textContent;
+                if (Object.keys(mapPeers).length < 2 && connectedUser === 'Finding...'){
+                    console.log('Adding member...')
+                    let receiver_channel_name = parsedData['message']['receiver_channel_name'];
+                    if (action === 'new-peer'){
+                        createOffer(peerData, receiver_channel_name);
+                    }
+                    else if (action === 'new-offer'){
+                        let offer = parsedData['message']['sdp'];
+                        createAnswer(offer, peerData, receiver_channel_name);
+                    }
+                    else if (action === 'new-answer'){
+                        let answer = parsedData['message']['sdp'];
+                        let peer = mapPeers[peerUser][0];
+                        peer.setRemoteDescription(answer);
+                    }
+                };
 
             }
             websocket.onclose = function (event) {
@@ -238,7 +251,7 @@ function main(){
             }
         };
 
-        const connectionInterval = setInterval(()=>{
+        connectionInterval = setInterval(()=>{
             connectToPeer();
         }, 5000);
     };
@@ -259,7 +272,8 @@ function main(){
         for (let peerUser in mapPeers) {
             let peer = mapPeers[peerUser][0];
             peer.close();
-            delete mapPeers[peerUser];
+            // delete mapPeers[peerUser];
+            mapPeers = {};
         }
         this.style.display = 'none';
         document.getElementById('other-user').style.display = 'none';

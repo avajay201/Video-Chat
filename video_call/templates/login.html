@@ -1,20 +1,28 @@
 {% extends 'base.html' %}
+{% load socialaccount %}
 {% block body %}
 <div>
     <h1 class="text-center current">Login</h1>
     <form id="login-form" class="my-3 text-center" accept="/login" method="post">
         {% csrf_token %}
         <div class="text-center my-3">
-            <input class="mx-3" name="username" id="username" placeholder="Username"/>
-            <input class="mx-3" name="password" type="password" id="password" placeholder="Password"/>
+            <input class="mx-3" name="username" id="username" placeholder="Username" />
+            <input class="mx-3" name="password" type="password" id="password" placeholder="Password" />
         </div>
         <button class="my-2" type="submit">Submit</button>
+    </form>
+    <form action="{% provider_login_url 'google' %}" method="GET" class="google-login-form">
+        <button type="submit" class="google-login-button">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo"
+                class="google-logo">
+            <span>Login with Google</span>
+        </button>
     </form>
 </div>
 {% endblock body %}
 {% block js %}
 let msg = "{{msg}}"
 if (msg){
-    alert(msg);
+alert(msg);
 }
 {% endblock js %}

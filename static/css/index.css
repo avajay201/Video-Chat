@@ -1,4 +1,4 @@
-*{
+* {
     font-family: monospace;
 }
 
@@ -21,14 +21,15 @@
 }
 
 .heading h1 {
-    margin: 0!important;
+    margin: 0 !important;
 }
 
-.heading a:hover{
+.heading a:hover {
     color: lightgoldenrodyellow;
 }
 
-.heading, .heading a {
+.heading,
+.heading a {
     color: lightgoldenrodyellow;
     text-decoration: none;
 }
@@ -133,20 +134,24 @@ video {
     display: none;
 } */
 
-#other-user, #self-user {
+#other-user,
+#self-user {
     display: none;
 }
 
 .loader {
     width: 350px;
     height: 14px;
-    background: radial-gradient(circle closest-side,#000 92%,#0000) calc(100%/3) 0/calc(100%/4) 100%;
+    background: radial-gradient(circle closest-side, #000 92%, #0000) calc(100%/3) 0/calc(100%/4) 100%;
     animation: l2 0.5s infinite linear;
 }
 
 @keyframes l2 {
-    100% {background-position: 0 0}
+    100% {
+        background-position: 0 0
+    }
 }
+
 /* home css end */
 
 
@@ -164,13 +169,15 @@ video {
     width: 50%;
 }
 
-.register-form div input, .register-form div select {
+.register-form div input,
+.register-form div select {
     width: 50%;
 }
 
 .dob {
-    display: flow!important;
+    display: flow !important;
 }
+
 /* register css end */
 
 
@@ -192,10 +199,12 @@ video {
     justify-content: space-between;
     margin: 0 35%;
 }
+
 /* profile css end */
 
 
 @media (max-width: 800px) {
+
     /* home css start */
     .input-wrapper input {
         width: 50%;
@@ -218,6 +227,7 @@ video {
     #start-btn {
         bottom: 10%;
     }
+
     /* home css start */
 
 
@@ -225,6 +235,7 @@ video {
     .register-form div {
         width: 100%;
     }
+
     /* register css end */
 
 
@@ -232,5 +243,39 @@ video {
     .user-details {
         margin: 0 20%;
     }
+
     /* profile css end */
 }
+
+
+/* google login style start */
+.google-login-form {
+    display: flex;
+    justify-content: center;
+}
+
+.google-login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #757575;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.google-login-button:hover {
+    background-color: #f5f5f5;
+}
+
+.google-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+/* google login style end */

@@ -6,8 +6,9 @@ class VideoCallConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_name = 'masti_time'
         members = await self.member_count()
-        if members > 2:
-            return
+        print('members>>>>', members)
+        # if members > 2:
+        #     return
         await self.channel_layer.group_add(
             self.room_name,
             self.channel_name
@@ -28,6 +29,8 @@ class VideoCallConsumer(AsyncWebsocketConsumer):
             self.room_name,
             self.channel_name
         )
+        members = await self.member_count()
+        print('members>>>>', members)
         # print('Disconnected')
 
     async def receive(self, text_data):
